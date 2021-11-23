@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from Main.views import all_tasks_by_user
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('allTask', all_tasks_by_user)
 ]

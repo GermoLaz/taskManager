@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {%for category in categories%}
+    <div style = "float: left">
+        <table border="1">
+                <thead>
+                    <tr>
+                        <th>{{category.Title}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {%for task in tasks%}
+                    {%if task.Category.id == category.id%}
+                        <tr><td><h1>{{task.Title}}</h1><br>
+                        <h6>{{task.Status.Title}}</h6><br>
+                        <h6>{{task.Owner.username}}</h6><br>
+                        <h2>{{task.Content}}</h2>
+                        <button>Add Task</button>
+                        </td></tr>
+
+
+                    {% endif %}
+                {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    {%endfor%}
+
+</body>
+</html>
