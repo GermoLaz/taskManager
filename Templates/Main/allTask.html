@@ -5,6 +5,20 @@
     <title>Title</title>
 </head>
 <body>
+    <nav>
+         <div>
+             <form action='/label/add' method='POST'>{%csrf_token %}
+                    <button type='submit'>Add Label</button>
+            </form>
+         </div>
+        <div>
+             <form action='/label/showAllLabels' method='POST'>{%csrf_token %}
+                    <button type='submit'>Show All Labels</button>
+            </form>
+         </div>
+
+    </nav>
+
     {%for category in categories%}
     <div style = "float: left">
         <table border="1">
@@ -22,8 +36,6 @@
                         <h2>{{task.Content}}</h2>
                         <button>Add Task</button>
                         </td></tr>
-
-
                     {% endif %}
                 {%endfor%}
                 </tbody>

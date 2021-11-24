@@ -1,10 +1,10 @@
 from django.shortcuts import render
-
-# Create your views here.
 from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt
-
-
+from django.views.generic import CreateView,FormView,DeleteView
+from Main.forms import LabelForm
+from Main.models import Task, Category, Label
+from django.contrib.auth.decorators import login_required
 
 @csrf_exempt
 def login_view(request):
@@ -20,12 +20,32 @@ def login_view(request):
         else:
             return render(request,'Main/form.html')
 
-from Main.models import Task, Category
-from django.contrib.auth.decorators import login_required
 
 @login_required
 def all_tasks_by_user(request):
     tasks = Task.objects.all()
     categories = Category.objects.all()
     return render(request, 'Main/allTask.html', {'tasks': tasks, 'categories': categories})
+
+
+def showAllLabels(request):
+    labels = Label.objects.all()
+    return render(request, 'Main/AllLabels.html', {'labels': labels})
+
+
+class DeleteLabel(DeleteView):
+    model = Label
+    success_url ='/allTask'
+
+
+class CreateLabel(CreateView):
+    model = Label
+    fields = ['Title','Color']
+    template_name = 'Main/label.html'
+    success_url = '/allTask'
+
+
+
+
+
 

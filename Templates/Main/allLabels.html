@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {%for label in labels%}
+    <div style = "float: left">
+        <table border="1">
+                <thead>
+                    <tr>
+                        <tr><td><h1>{{label.Title}}</h1><br>
+                        <h6>{{label.Color}}</h6><br></td></tr>
+                    </tr>
+                </thead>
+                <tbody>
+                     <div>
+                         <form action='/label/delete/{{ label.id }}' method='POST'>{%csrf_token %}
+                                <button type='submit'>Delete Label</button>
+                        </form>
+                     </div>
+                </tbody>
+            </table>
+        </div>
+    {%endfor%}
+</body>
+</html>

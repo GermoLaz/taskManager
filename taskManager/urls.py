@@ -16,10 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from Main.views import all_tasks_by_user, login_view
+from Main.views import all_tasks_by_user, login_view, CreateLabel,DeleteLabel,showAllLabels
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('allTask', all_tasks_by_user),
     path('login', login_view),
+    path('label/add', CreateLabel.as_view()),
+    path('label/delete/<pk>', DeleteLabel.as_view()),
+    path('label/showAllLabels', showAllLabels),
 ]
