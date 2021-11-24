@@ -1,11 +1,8 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 # Create your models here.
-class User(models.Model):
-    username = models.CharField(max_length=200)
-    password = models.CharField(max_length=200)
-    email = models.EmailField()
+class MyUser(User):
     friends = models.ManyToManyField("self")
 
 
@@ -23,8 +20,8 @@ class Task(models.Model):
     Content = models.TextField(max_length=200)
     CreateDate = models.DateField(max_length=200)
     Status = models.ForeignKey(Label, on_delete=models.CASCADE)
-    UsersTags = models.ManyToManyField(User, related_name='users_tags')
-    Owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    UsersTags = models.ManyToManyField(MyUser, related_name='users_tags')
+    Owner = models.ForeignKey(MyUser, on_delete=models.CASCADE)
     Category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
 
