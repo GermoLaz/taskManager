@@ -16,9 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from Main.views import all_tasks_by_user
+from Main.views import all_tasks_by_user, CreateTask, delete_task_by_id, success, CreateCategory
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('allTask', all_tasks_by_user)
+    path('allTask/', all_tasks_by_user),
+    path('allTask/addTask/', CreateTask.as_view()),
+    path('allTask/deleteTask/', delete_task_by_id),
+    path('success/', success),
+    path('test/', CreateCategory.as_view())
 ]
