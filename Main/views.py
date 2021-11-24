@@ -4,6 +4,8 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt
 
+
+
 @csrf_exempt
 def login_view(request):
     if request.method == 'GET':
@@ -14,11 +16,9 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            # Redirect to a success page.
-            ...
+            return all_tasks_by_user(request)
         else:
-            # Return an 'invalid login' error message.
-            ...
+            return render(request,'Main/form.html')
 
 from Main.models import Task, Category
 from django.contrib.auth.decorators import login_required
