@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from Main.views import all_tasks_by_user, login_view, CreateLabel,DeleteLabel,showAllLabels,CreateTask
+from Main.views import all_tasks_by_user, login_view, CreateLabel,DeleteLabel,showAllLabels,CreateTask,DeleteTask
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,7 +26,7 @@ urlpatterns = [
     path('label/delete/<pk>', DeleteLabel.as_view()),
     path('allTask', all_tasks_by_user),
     path('task/add', CreateTask.as_view()),
-    path('task/delete/<pk>', DeleteLabel.as_view()),
+    path('task/delete/<pk>', DeleteTask.as_view()),
 
 
 
