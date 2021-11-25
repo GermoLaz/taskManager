@@ -24,8 +24,6 @@ def login_view(request):
             return render(request,'Main/form.html')
 
 
-
-
 #TASK---------
 @login_required
 def all_tasks_by_user(request):
@@ -60,7 +58,7 @@ class CreateTask(CreateView):
     #     return self.initial.copy()
 
 
-#LABEL
+@login_required
 def showAllLabels(request):
     labels = Label.objects.all()
     return render(request, 'Main/AllLabels.html', {'labels': labels})
@@ -77,6 +75,15 @@ class CreateLabel(CreateView):
     template_name = 'Main/label.html'
     success_url = '/allTask'
 
+class DeleteCategory(DeleteView):
+    model = Category
+    success_url = '/allTask'
+
+class CreateCategory(CreateView):
+    model = Category
+    fields = ['Title']
+    template_name = 'Main/category.html'
+    success_url = '/allTask'
 
 
 
