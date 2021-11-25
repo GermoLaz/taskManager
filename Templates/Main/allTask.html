@@ -15,8 +15,13 @@
              <form action='/label/showAllLabels' method='POST'>{%csrf_token %}
                     <button type='submit'>Show All Labels</button>
             </form>
-         </div>
-
+        </div>
+        <div>
+            <form action='/category/add' method='POST'>{%csrf_token %}
+                <button type='submit'>Add Category</button>
+            </form>
+        </div>
+        <br>
     </nav>
 
     {%for category in categories%}
@@ -26,6 +31,9 @@
                     <tr>
                         <th>{{category.Title}}</th>
                     </tr>
+                    <form action='/category/delete/{{ category.id }}' method='POST'>{%csrf_token %}
+                        <button type='submit'>Delete Category</button>
+                    </form>
                 </thead>
                 <tbody>
                 {%for task in tasks%}
