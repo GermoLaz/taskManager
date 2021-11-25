@@ -34,10 +34,16 @@
                         <h6>{{task.Status.Title}}</h6><br>
                         <h6>{{task.Owner.username}}</h6><br>
                         <h2>{{task.Content}}</h2>
-                        <button>Add Task</button>
                         </td></tr>
                     {% endif %}
+
                 {%endfor%}
+                 <tr><td><div>
+                     <form action='/task/add/{{category.id}}' method='POST'>{%csrf_token %}
+                             <button type='submit'>Add Task</button>
+                         </form>
+                        </div></td></tr>
+
                 </tbody>
             </table>
         </div>
