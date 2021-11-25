@@ -60,11 +60,6 @@ class CreateTask(CreateView):
     #     return self.initial.copy()
 
 
-
-
-
-
-
 #LABEL
 def showAllLabels(request):
     labels = Label.objects.all()
