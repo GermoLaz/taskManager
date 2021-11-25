@@ -1,12 +1,13 @@
 from datetime import date
 
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView,FormView,DeleteView
 
-from Main.models import Task, Category, Label
+from Main.models import Task, Category, Label, User
 from django.contrib.auth.decorators import login_required
+
 
 @csrf_exempt
 def login_view(request):
@@ -40,13 +41,24 @@ class DeleteTask(DeleteView):
 
 class CreateTask(CreateView):
     model = Task
-    fields = ['Title','Content','Status']
-    template_name = 'Main/label.html'
+    fields = ['Title','Content','Status','CreateDate','Category']
+    template_name = 'Main/task.html'
     success_url = '/allTask'
 
-    def get_initial(self):
-        self.initial = {"category": 1, "Owner": 1, "CreateDate": date.today()}
-        return self.initial.copy()
+    def post(self, request):
+        form = self.get_form()
+
+        if form.is_valid():
+            Task.objects.create(Title = form.data['Title'],Content = form.data['Content'],Status_id = form.data['Status'],CreateDate = form.data['CreateDate'],Category_id = form.data['Category'], Owner_id = request.user.id)
+            return redirect('/allTask')
+
+    # def get_initial(self):
+    #     categoryThis = Category.objects.get(id = self.kwargs.get('Category_id'))
+    #     userThis = MyUser.objects.get(id=self.request.user.id)
+    #
+    #     self.initial = {"Category_id": categoryThis.id , "Owner": userThis}
+    #     return self.initial.copy()
+
 
 
 

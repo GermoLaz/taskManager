@@ -25,7 +25,7 @@ urlpatterns = [
     path('label/add', CreateLabel.as_view()),
     path('label/delete/<pk>', DeleteLabel.as_view()),
     path('allTask', all_tasks_by_user),
-    path('task/add/<int:Category_id>', CreateTask.as_view()),
+    path('task/add', CreateTask.as_view()),
     path('task/delete/<pk>', DeleteLabel.as_view()),
 
 
