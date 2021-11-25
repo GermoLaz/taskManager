@@ -28,7 +28,9 @@ urlpatterns = [
     path('task/add', CreateTask.as_view()),
     path('task/delete/<pk>', DeleteTask.as_view()),
     path('category/add', CreateCategory.as_view()),
-    path('category/delete/<pk>', DeleteCategory.as_view())
+    path('category/delete/<pk>', DeleteCategory.as_view()),
+    path('user/add', CreateUser.as_view())
+
 
 
 

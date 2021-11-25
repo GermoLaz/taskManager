@@ -86,6 +86,13 @@ class CreateCategory(CreateView):
     success_url = '/allTask'
 
 
+class CreateUser(CreateView):
+    model = User
+    fields = ['username', 'email', 'password']
+    template_name = 'Main/signin.html'
+    success_url = '/login'
+
+
 
 
 
