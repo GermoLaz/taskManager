@@ -23,12 +23,12 @@ urlpatterns = [
     path('login', login_view),
     path('label/showAllLabels', showAllLabels),
     path('label/add', CreateLabel.as_view()),
-    path('label/delete/<pk>', DeleteLabel.as_view()),
-    path('allTask', all_tasks_by_user),
+    path('label/delete/<int:id>', deleteLabel),
+    path('allTask/<pk>', all_tasks_by_user),
     path('task/add', CreateTask.as_view()),
-    path('task/delete/<pk>', DeleteTask.as_view()),
+    path('task/delete/<int:id>', deleteTask),
     path('category/add', CreateCategory.as_view()),
-    path('category/delete/<pk>', DeleteCategory.as_view()),
+    path('category/delete/<int:id>', deleteCategory),
     path('user/add', CreateUser.as_view())
 
 
