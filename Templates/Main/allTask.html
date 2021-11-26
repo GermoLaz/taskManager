@@ -11,20 +11,33 @@
 </head>
 <body>
     <nav>
-        <div style = "display: inline">
-            <form action='/label/showAllLabels' method='POST'>{%csrf_token %}
-                <button class="btn" type='submit'>Show All Labels</button>
-            </form>
-        </div>
-        <div style = "display: inline">
-            <a class="btn" href="/task/add">Add Task</a>
-        </div>
-        <div style = "display: inline">
-            <a class="btn" href="/category/add">Add Category</a>
-        </div>
-        <div style = "display: inline">
-            <a class="btn" href="/label/add">Add Label</a>
-        </div>
+    <div style="display: flex; justify-content: space-around; width: 30%" >
+        <form display: block action='/label/showAllLabels' method='POST'>{%csrf_token %}
+            <button class="btn" type='submit'>Show All Labels</button>
+        </form>
+
+        <a display: block class="btn" href="/task/add">Add Task</a>
+        <a display: block class="btn" href="/category/add">Add Category</a>
+    </div>
+
+
+
+{#        <div style = "display: inline">#}
+{#            <form action='/label/showAllLabels' method='POST'>{%csrf_token %}#}
+{#                <button class="btn" type='submit'>Show All Labels</button>#}
+{#            </form>#}
+{#        </div>#}
+        {#{#        <div style = "display: inline">#}
+        {#{#            <a class="btn" href="/task/add">Add Task</a>#}
+        {#{#        </div>#}
+{#        <div style = "display: inline">#}
+        {#{#            <a cladd Category</a>#}
+{#        </div>#}
+{#        <div style = "display: inline">ss="btn" href="/category/add"> #}
+{#            <a class="btn" href="/label/add">Add Label</a>#}
+{#        </div>#}
+
+
 {#      <div style = "display: inline">#}
 {#          <form action='/category/add' method='POST'>#}
 {#              {%csrf_token %}#}
@@ -40,26 +53,44 @@
 
     {%for category in categories%}
     <div style = "float: left">
-        <table border="1">
+        <table style="margin: 2rem 2rem" border="1">
                 <thead>
                     <tr>
-                        <th>{{category.Title}}</th>
+                        <th>
+                            {{category.Title}}
+                            <form style="display: inline" action='/category/delete/{{ category.id }}' method='POST'>{%csrf_token %}
+                                <button class="btn" type='submit'>Delete</button>
+                            </form>
+                        </th>
+
                     </tr>
-                    <form action='/category/delete/{{ category.id }}' method='POST'>{%csrf_token %}
-                        <button class="btn" type='submit'>Delete Category</button>
-                    </form>
+
                 </thead>
                 <tbody>
                 {%for task in tasks%}
                     {%if task.Category.id == category.id%}
-                        <tr><td><h1>{{task.Title}}</h1><br>
-                        <h6>{{task.Status.Title}}</h6><br>
-                        <h6>{{task.Owner.username}}</h6><br>
-                        <h2>{{task.Content}}</h2>
-                         <div>
-                         <form action='/task/delete/{{ task.id }}' method='POST'>{%csrf_token %}
-                                <button class="btn" type='submit'>Delete</button>
-                        </form>
+{#                        <tr><td><h1>{{task.Title}}</h1><br>#}
+{#                        <h6>{{task.Status.Title}}</h6><br>#}
+{#                        <h6>{{task.Owner.username}}</h6><br>#}
+{#                        <h2>{{task.Content}}</h2>#}
+{#                         <div>#}
+{#                         <form action='/task/delete/{{ task.id }}' method='POST'>{%csrf_token %}#}
+{#                                <button class="btn" type='submit'>Delete</button>#}
+{#                        </form>#}
+{#                        </div>#}
+{#                        </td></tr>#}
+                        <tr><td>
+                        <div class="card" Style="width:18rem">
+                            <div class="card-body">
+                                <h5 class="card-tile"> {{task.Title}} </h5>
+                                <p class="card-text"><label for="">Owner:</label>  {{task.Owner.username}}</p>
+                                <p class="card-text"><label for="">Status:</label>  {{task.Status.Title}}</p>
+                                <label for="">Description:</label>
+                                <p class="card-text">{{task.Content}}</p>
+                                <form action='/task/delete/{{ task.id }}' method='POST'>{%csrf_token %}
+                                    <button class="btn" type='submit'>Delete</button>
+                                </form>
+                            </div>
                         </div>
                         </td></tr>
                     {% endif %}

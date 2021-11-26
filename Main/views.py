@@ -65,7 +65,7 @@ def showAllLabels(request):
 @login_required
 def deleteLabel(request,id):
     Label.objects.filter(id=id).delete()
-    return redirect('/label/showAllLabels')
+    return redirect('/allTask/'+ str(request.user.id))
 
 class CreateLabel(CreateView):
     model = Label
